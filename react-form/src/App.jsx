@@ -2,8 +2,9 @@ import { useState } from 'react'
 import articoliVideogiochi from './assets/Articoli'
 import './App.css'
 
+
 function App() {
-  const [Article, setArticle] = useState([
+  const [articles, setArticles] = useState([
   "La Storia dei Videogiochi",
   "I Migliori RPG di Sempre",
   "Come Funziona un Motore Grafico",
@@ -12,7 +13,7 @@ function App() {
   "E-sport: L'Ascesa del Gioco Competitivo",
   "Open World: Libertà o Caos?"
   ]);
-  const [nuovoArticolo, setNewArticle] = useState('');
+  const [newArticle, setNewArticle] = useState('');
   return (
 
     <>
@@ -20,20 +21,27 @@ function App() {
         <h1>Games</h1>
       </header>
       <main>
-        <h2>Articoli</h2>
-        <p>Article : {JSON.stringify(Article)}</p>
+        <h2 className='article'>Articoli</h2>
+        <p>Article : {JSON.stringify(articles)}</p>
+        <ul className='article'>
+          {articles.map((article, index)=>{
+            return (
+              <li key={index}>{article}</li>
+            )
+          })}
+        </ul>
         
-        <form onSubmit={function Submit(event) {
+        <form className='article' onSubmit={function Submit(event) {
           event.preventDefault();
-          setArticle([...Article, nuovoArticolo]);
+          setArticles([...articles, newArticle]);
           setNewArticle('');
         }}>
-          <input type="text" value={nuovoArticolo}
+          <input type="text" value={newArticle}
             onChange={(event) => {
               setNewArticle(event.target.value)
               
             }} />
-            <button type="submit">Aggiungi Articolo</button>
+            <button  type="submit">Aggiungi Articolo</button>
         </form>
 
       </main>
